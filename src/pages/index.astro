@@ -15,7 +15,7 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
    <HeroSlider />
 
   <!-- Popular Destinations (Visual Grid) -->
-  <section class="section bg-light">
+  <section class="section bg-light" id="destinations">
     <div class="container">
       <div class="section-header text-center">
         <h2>Popular Destinations</h2>
@@ -23,24 +23,48 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
       </div>
       
       <div class="destinations-grid">
-        <a href="/packages" class="dest-card">
-          <img src="/images/tour-4.png" alt="Rajasthan" />
+        <div class="dest-card fade-up" style="--delay:0ms">
+          <img src="/images/tour-4.png" alt="Rajasthan" loading="lazy" />
           <div class="dest-content">
             <h3>Rajasthan</h3>
+            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Rajasthan%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
           </div>
-        </a>
-        <a href="/packages" class="dest-card">
-          <img src="/images/tour-1.jpeg" alt="Kashmir" />
+        </div>
+        <div class="dest-card fade-up" style="--delay:80ms">
+          <img src="/images/tour-1.jpeg" alt="Kashmir" loading="lazy" />
           <div class="dest-content">
             <h3>Kashmir</h3>
+            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Kashmir%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
           </div>
-        </a>
-        <a href="/packages" class="dest-card">
-          <img src="/images/tour-3.png" alt="Andaman" />
+        </div>
+        <div class="dest-card fade-up" style="--delay:160ms">
+          <img src="/images/tour-3.png" alt="Andaman" loading="lazy" />
           <div class="dest-content">
             <h3>Andaman</h3>
+            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Andaman%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
           </div>
-        </a>
+        </div>
+        <div class="dest-card fade-up" style="--delay:240ms">
+          <img src="/images/tour-5.png" alt="Kerala" loading="lazy" />
+          <div class="dest-content">
+            <h3>Kerala</h3>
+            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Kerala%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
+          </div>
+        </div>
+        <div class="dest-card fade-up" style="--delay:320ms">
+          <img src="/images/tour-7.png" alt="Darjeeling" loading="lazy" />
+          <div class="dest-content">
+            <h3>Darjeeling</h3>
+            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Darjeeling%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
+          </div>
+        </div>
+        <div class="dest-card fade-up" style="--delay:400ms">
+          <img src="/images/tour-9.png" alt="Goa" loading="lazy" />
+          <div class="dest-content">
+            <h3>Goa</h3>
+            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Goa%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -117,7 +141,7 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
     <div class="container text-center">
       <h2>Ready for your next adventure?</h2>
       <p>Contact us today and let us plan the perfect holiday for you.</p>
-      <a href="/contact" class="btn btn-primary cta-btn">Get in Touch</a>
+      <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20a%20tour%20with%20Cholo%20Jai%20Tour%20%26%20Travels!" target="_blank" rel="noopener" class="btn btn-primary cta-btn">📲 Book on WhatsApp</a>
     </div>
   </section>
 
@@ -189,41 +213,85 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
   /* Destinations */
   .destinations-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .destinations-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
   }
 
   .dest-card {
     position: relative;
-    border-radius: var(--radius);
+    border-radius: 12px;
     overflow: hidden;
-    height: 350px;
+    height: 200px;
     display: block;
+    cursor: pointer;
+    /* fade-up start state */
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    transition-delay: var(--delay, 0ms);
+  }
+
+  .dest-card.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .dest-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    transition: transform 0.5s ease;
   }
 
   .dest-card:hover img {
-    transform: scale(1.1);
+    transform: scale(1.08);
   }
 
   .dest-content {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
     display: flex;
-    align-items: flex-end;
-    padding: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 12px;
+    gap: 6px;
   }
 
   .dest-content h3 {
-    color: var(--c-neutral);
-    font-size: 1.5rem;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .dest-book {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #25D366;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+
+  .dest-book:hover {
+    background: #1db954;
+    transform: scale(1.05);
   }
 
   /* Features */
@@ -311,3 +379,20 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
     }
   }
 </style>
+
+<script>
+  // Scroll-triggered fade-up for destination cards
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+</script>

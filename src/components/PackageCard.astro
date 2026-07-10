@@ -33,7 +33,7 @@ const { pkg } = Astro.props;
     <p class="card-description">{pkg.shortDescription}</p>
     
     <div class="card-footer">
-      <a href="/contact" class="btn btn-secondary btn-full">Book Now</a>
+      <a href={`https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20${encodeURIComponent(pkg.title)}%20package!`} target="_blank" rel="noopener" class="btn btn-secondary btn-full">📲 Book on WhatsApp</a>
     </div>
   </div>
 </article>

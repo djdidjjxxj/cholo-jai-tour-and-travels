@@ -197,6 +197,20 @@ import { Phone, Mail } from 'lucide-astro';
     width: 100%;
   }
 
+  /* Hamburger button — base: hidden on desktop */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 200;
+  }
+
   @media (max-width: 768px) {
     .header-top {
       display: none;
@@ -211,22 +225,8 @@ import { Phone, Mail } from 'lucide-astro';
       height: 45px;
     }
     .hamburger {
-      display: flex;
+      display: flex !important;
     }
-  }
-
-  /* Hamburger button */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 28px;
-    height: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 200;
   }
 
   .hamburger span {
