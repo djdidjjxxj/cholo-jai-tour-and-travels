@@ -1,0 +1,321 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PackageCard from '../components/PackageCard.astro';
+import { packages } from '../data/packages';
+import { aboutData } from '../data/siteConfig';
+import { Shield, Award, Map, Users } from 'lucide-astro';
+
+const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1 class="hero-title">Discover the World<br/>With Comfort & Style</h1>
+      <p class="hero-subtitle">Premium travel experiences tailored just for you. Explore breathtaking destinations with the most trusted travel agency.</p>
+      <div class="hero-cta">
+        <a href="/packages" class="btn btn-primary">Explore Packages</a>
+        <a href="/contact" class="btn btn-secondary" style="color: white; border-color: white;">Plan Your Trip</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Destinations (Visual Grid) -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Popular Destinations</h2>
+        <p>Explore our most loved travel spots</p>
+      </div>
+      
+      <div class="destinations-grid">
+        <a href="/packages" class="dest-card">
+          <img src="/images/tour-4.png" alt="Rajasthan" />
+          <div class="dest-content">
+            <h3>Rajasthan</h3>
+          </div>
+        </a>
+        <a href="/packages" class="dest-card">
+          <img src="/images/tour-1.jpeg" alt="Kashmir" />
+          <div class="dest-content">
+            <h3>Kashmir</h3>
+          </div>
+        </a>
+        <a href="/packages" class="dest-card">
+          <img src="/images/tour-3.png" alt="Andaman" />
+          <div class="dest-content">
+            <h3>Andaman</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Why Choose Us</h2>
+        <p>We provide the best travel experiences with premium services</p>
+      </div>
+
+      <div class="grid grid-4 features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><Shield size={32} /></div>
+          <h3>Safe Travel</h3>
+          <p>Your safety is our top priority. We ensure secure and comfortable journeys.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><Award size={32} /></div>
+          <h3>Premium Quality</h3>
+          <p>We don't compromise on quality. Best hotels and transport guaranteed.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><Map size={32} /></div>
+          <h3>Expert Guides</h3>
+          <p>Learn about your destinations with our experienced local tour guides.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><Users size={32} /></div>
+          <h3>Family Friendly</h3>
+          <p>Packages designed for all age groups to enjoy together seamlessly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Tours -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Featured Tours</h2>
+        <p>Our handpicked premium travel packages</p>
+      </div>
+
+      <div class="grid grid-3">
+        {featuredPackages.map(pkg => (
+          <PackageCard pkg={pkg} />
+        ))}
+      </div>
+      
+      <div class="text-center view-all-btn">
+        <a href="/packages" class="btn btn-secondary">View All Packages</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="section stats-section">
+    <div class="container">
+      <div class="grid grid-4 text-center">
+        {aboutData.stats.map(stat => (
+          <div class="stat-item">
+            <h3 class="stat-value">{stat.value}</h3>
+            <p class="stat-label">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section cta-section">
+    <div class="container text-center">
+      <h2>Ready for your next adventure?</h2>
+      <p>Contact us today and let us plan the perfect holiday for you.</p>
+      <a href="/contact" class="btn btn-primary cta-btn">Get in Touch</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .hero {
+    height: 80vh;
+    min-height: 600px;
+    background-image: url('/images/tour-2.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    color: var(--c-neutral);
+    max-width: 800px;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    color: var(--c-neutral);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 40px;
+    line-height: 1.8;
+    max-width: 600px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 20px;
+  }
+
+  .section-header {
+    margin-bottom: 50px;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .section-header p {
+    color: var(--c-text-muted);
+    font-size: 1.1rem;
+  }
+
+  .bg-light {
+    background-color: var(--c-bg-light);
+  }
+
+  /* Destinations */
+  .destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .dest-card {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 350px;
+    display: block;
+  }
+
+  .dest-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .dest-card:hover img {
+    transform: scale(1.1);
+  }
+
+  .dest-content {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+  }
+
+  .dest-content h3 {
+    color: var(--c-neutral);
+    font-size: 1.5rem;
+  }
+
+  /* Features */
+  .feature-card {
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .feature-icon {
+    width: 70px;
+    height: 70px;
+    background-color: var(--c-bg-light);
+    color: var(--c-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: var(--transition);
+  }
+
+  .feature-card:hover .feature-icon {
+    background-color: var(--c-accent);
+    color: var(--c-neutral);
+    transform: translateY(-5px);
+  }
+
+  .feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+  }
+
+  .feature-card p {
+    color: var(--c-text-muted);
+  }
+
+  .view-all-btn {
+    margin-top: 50px;
+  }
+
+  /* Stats */
+  .stats-section {
+    background-color: var(--c-primary);
+    color: var(--c-neutral);
+  }
+
+  .stat-value {
+    font-size: 3rem;
+    color: var(--c-neutral);
+    margin-bottom: 10px;
+  }
+
+  .stat-label {
+    opacity: 0.8;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* CTA */
+  .cta-section {
+    background-color: var(--c-bg-light);
+    padding: 100px 0;
+  }
+
+  .cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .cta-section p {
+    font-size: 1.2rem;
+    color: var(--c-text-muted);
+    margin-bottom: 40px;
+  }
+
+  .cta-btn {
+    font-size: 1.1rem;
+    padding: 15px 40px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-cta {
+      flex-direction: column;
+    }
+  }
+</style>

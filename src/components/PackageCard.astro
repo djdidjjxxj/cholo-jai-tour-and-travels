@@ -1,0 +1,132 @@
+---
+import type { TourPackage } from '../data/packages';
+import { MapPin, Clock } from 'lucide-astro';
+
+export interface Props {
+  pkg: TourPackage;
+}
+
+const { pkg } = Astro.props;
+---
+
+<article class="package-card">
+  <div class="card-image-wrapper">
+    <img src={pkg.image} alt={pkg.title} class="card-image" loading="lazy" />
+    <div class="card-price">
+      <span>{pkg.price}</span>
+    </div>
+  </div>
+  
+  <div class="card-content">
+    <div class="meta-info">
+      <div class="meta-item">
+        <MapPin size={16} class="icon" />
+        <span>{pkg.destination}</span>
+      </div>
+      <div class="meta-item">
+        <Clock size={16} class="icon" />
+        <span>{pkg.duration}</span>
+      </div>
+    </div>
+    
+    <h3 class="card-title">{pkg.title}</h3>
+    <p class="card-description">{pkg.shortDescription}</p>
+    
+    <div class="card-footer">
+      <a href="/contact" class="btn btn-secondary btn-full">Book Now</a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .package-card {
+    background-color: var(--c-neutral);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--c-border);
+  }
+
+  .package-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .card-image-wrapper {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .package-card:hover .card-image {
+    transform: scale(1.05);
+  }
+
+  .card-price {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--c-accent);
+    color: var(--c-neutral);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-family: var(--f-heading);
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .meta-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.875rem;
+    color: var(--c-text-muted);
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .meta-item .icon {
+    color: var(--c-primary);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: var(--c-text);
+  }
+
+  .card-description {
+    color: var(--c-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex-grow: 1;
+  }
+
+  .btn-full {
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,171 @@
+---
+import { siteConfig } from '../data/siteConfig';
+import { MapPin, Phone, Mail, ChevronRight } from 'lucide-astro';
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col brand-col">
+        <img src="/logo.png" alt={siteConfig.logoAlt} class="footer-logo" onerror="this.src='/images/tour-1.jpeg'; this.classList.add('logo-fallback');" />
+        <p class="brand-desc">
+          We provide premium and curated travel experiences to help you explore the world with ease and comfort. Your journey is our priority.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="/"><ChevronRight size={14} /> Home</a></li>
+          <li><a href="/packages"><ChevronRight size={14} /> Tour Packages</a></li>
+          <li><a href="/about"><ChevronRight size={14} /> About Us</a></li>
+          <li><a href="/gallery"><ChevronRight size={14} /> Gallery</a></li>
+          <li><a href="/contact"><ChevronRight size={14} /> Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Top Destinations</h3>
+        <ul class="footer-links">
+          <li><a href="/packages"><ChevronRight size={14} /> Kashmir</a></li>
+          <li><a href="/packages"><ChevronRight size={14} /> Darjeeling</a></li>
+          <li><a href="/packages"><ChevronRight size={14} /> Andaman</a></li>
+          <li><a href="/packages"><ChevronRight size={14} /> Kerala</a></li>
+          <li><a href="/packages"><ChevronRight size={14} /> Rajasthan</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Contact Us</h3>
+        <ul class="contact-list">
+          <li>
+            <MapPin size={18} class="icon" />
+            <span>{siteConfig.address}</span>
+          </li>
+          <li>
+            <Phone size={18} class="icon" />
+            <span>{siteConfig.phoneNumbers.join(', ')}</span>
+          </li>
+          <li>
+            <Mail size={18} class="icon" />
+            <span>{siteConfig.email}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--c-primary);
+    color: var(--c-neutral);
+    margin-top: auto;
+    padding-top: 80px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    padding-bottom: 60px;
+  }
+
+  .footer-logo {
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+  }
+
+  .brand-desc {
+    opacity: 0.8;
+    line-height: 1.8;
+  }
+
+  .footer-title {
+    color: var(--c-neutral);
+    font-size: 1.25rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  .footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--c-accent);
+    border-radius: 2px;
+  }
+
+  .footer-links, .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 12px;
+  }
+
+  .footer-links a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.8;
+    transition: var(--transition);
+  }
+
+  .footer-links a:hover {
+    opacity: 1;
+    color: var(--c-accent);
+    transform: translateX(5px);
+  }
+
+  .contact-list li {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+
+  .contact-list .icon {
+    color: var(--c-accent);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .footer-bottom {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
