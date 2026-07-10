@@ -61,11 +61,7 @@ const slides = [
     ))}
   </div>
 
-  <!-- Prev / Next arrows -->
-  <button class="hs-arrow hs-prev" id="hs-prev" aria-label="Previous slide">&#8592;</button>
-  <button class="hs-arrow hs-next" id="hs-next" aria-label="Next slide">&#8594;</button>
-
-  <!-- Dot pagination -->
+  <!-- Dot pagination only -->
   <div class="hs-dots" id="hs-dots">
     {slides.map((_, i) => (
       <button class={`hs-dot ${i === 0 ? 'active' : ''}`} data-dot={i} aria-label={`Go to slide ${i + 1}`}></button>
@@ -292,13 +288,6 @@ const slides = [
       padding: 0.65rem 1.2rem;
       font-size: 0.88rem;
     }
-    .hs-arrow {
-      width: 40px;
-      height: 40px;
-      font-size: 1.1rem;
-    }
-    .hs-prev { left: 0.7rem; }
-    .hs-next { right: 0.7rem; }
   }
 </style>
 
@@ -324,9 +313,6 @@ const slides = [
     clearInterval(timer);
     startAuto();
   }
-
-  document.getElementById('hs-next')?.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
-  document.getElementById('hs-prev')?.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
 
   dots.forEach(dot => {
     dot.addEventListener('click', () => {

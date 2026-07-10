@@ -14,57 +14,111 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
    <!-- Hero Slider -->
    <HeroSlider />
 
-  <!-- Popular Destinations (Visual Grid) -->
-  <section class="section bg-light" id="destinations">
+  <!-- Popular Destinations — horizontal scroll strip -->
+  <section class="section" id="destinations">
+    <div class="dest-header container">
+      <div>
+        <h2>Popular Destinations</h2>
+        <p>Swipe to explore our most loved spots</p>
+      </div>
+      <a href="/packages" class="dest-all-link">View All →</a>
+    </div>
+
+    <div class="dest-scroll-wrap">
+      <div class="dest-scroll-track">
+
+        <div class="ds-card fade-up" style="--delay:0ms">
+          <img src="/images/tour-1.jpeg" alt="Kashmir" loading="lazy" />
+          <div class="ds-overlay">
+            <span class="ds-tag">🏔️ North India</span>
+            <div class="ds-bottom">
+              <h3>Kashmir</h3>
+              <p class="ds-sub">From ₹12,999 / person</p>
+              <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Kashmir%20tour!" target="_blank" rel="noopener" class="ds-book">📲 Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-card fade-up" style="--delay:70ms">
+          <img src="/images/tour-4.png" alt="Rajasthan" loading="lazy" />
+          <div class="ds-overlay">
+            <span class="ds-tag">🏜️ Heritage</span>
+            <div class="ds-bottom">
+              <h3>Rajasthan</h3>
+              <p class="ds-sub">From ₹10,999 / person</p>
+              <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Rajasthan%20tour!" target="_blank" rel="noopener" class="ds-book">📲 Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-card fade-up" style="--delay:140ms">
+          <img src="/images/tour-3.png" alt="Andaman" loading="lazy" />
+          <div class="ds-overlay">
+            <span class="ds-tag">🏝️ Island</span>
+            <div class="ds-bottom">
+              <h3>Andaman</h3>
+              <p class="ds-sub">From ₹13,999 / person</p>
+              <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Andaman%20tour!" target="_blank" rel="noopener" class="ds-book">📲 Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-card fade-up" style="--delay:210ms">
+          <img src="/images/tour-5.png" alt="Kerala" loading="lazy" />
+          <div class="ds-overlay">
+            <span class="ds-tag">🌴 South India</span>
+            <div class="ds-bottom">
+              <h3>Kerala</h3>
+              <p class="ds-sub">From ₹10,999 / person</p>
+              <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Kerala%20tour!" target="_blank" rel="noopener" class="ds-book">📲 Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-card fade-up" style="--delay:280ms">
+          <img src="/images/tour-7.png" alt="Darjeeling" loading="lazy" />
+          <div class="ds-overlay">
+            <span class="ds-tag">☁️ Hill Station</span>
+            <div class="ds-bottom">
+              <h3>Darjeeling</h3>
+              <p class="ds-sub">From ₹11,499 / person</p>
+              <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Darjeeling%20tour!" target="_blank" rel="noopener" class="ds-book">📲 Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-card fade-up" style="--delay:350ms">
+          <img src="/images/tour-9.png" alt="Goa" loading="lazy" />
+          <div class="ds-overlay">
+            <span class="ds-tag">🌊 Beach</span>
+            <div class="ds-bottom">
+              <h3>Goa</h3>
+              <p class="ds-sub">From ₹9,999 / person</p>
+              <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Goa%20tour!" target="_blank" rel="noopener" class="ds-book">📲 Book Now</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Tours (moved before Why Choose Us) -->
+  <section class="section bg-light">
     <div class="container">
       <div class="section-header text-center">
-        <h2>Popular Destinations</h2>
-        <p>Explore our most loved travel spots</p>
+        <h2>Featured Tours</h2>
+        <p>Our handpicked premium travel packages</p>
+      </div>
+
+      <div class="grid grid-3">
+        {featuredPackages.map(pkg => (
+          <PackageCard pkg={pkg} />
+        ))}
       </div>
       
-      <div class="destinations-grid">
-        <div class="dest-card fade-up" style="--delay:0ms">
-          <img src="/images/tour-4.png" alt="Rajasthan" loading="lazy" />
-          <div class="dest-content">
-            <h3>Rajasthan</h3>
-            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Rajasthan%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
-          </div>
-        </div>
-        <div class="dest-card fade-up" style="--delay:80ms">
-          <img src="/images/tour-1.jpeg" alt="Kashmir" loading="lazy" />
-          <div class="dest-content">
-            <h3>Kashmir</h3>
-            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Kashmir%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
-          </div>
-        </div>
-        <div class="dest-card fade-up" style="--delay:160ms">
-          <img src="/images/tour-3.png" alt="Andaman" loading="lazy" />
-          <div class="dest-content">
-            <h3>Andaman</h3>
-            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Andaman%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
-          </div>
-        </div>
-        <div class="dest-card fade-up" style="--delay:240ms">
-          <img src="/images/tour-5.png" alt="Kerala" loading="lazy" />
-          <div class="dest-content">
-            <h3>Kerala</h3>
-            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Kerala%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
-          </div>
-        </div>
-        <div class="dest-card fade-up" style="--delay:320ms">
-          <img src="/images/tour-7.png" alt="Darjeeling" loading="lazy" />
-          <div class="dest-content">
-            <h3>Darjeeling</h3>
-            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Darjeeling%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
-          </div>
-        </div>
-        <div class="dest-card fade-up" style="--delay:400ms">
-          <img src="/images/tour-9.png" alt="Goa" loading="lazy" />
-          <div class="dest-content">
-            <h3>Goa</h3>
-            <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20the%20Goa%20tour%20package!" target="_blank" rel="noopener" class="dest-book">📲 Book Now</a>
-          </div>
-        </div>
+      <div class="text-center view-all-btn">
+        <a href="/packages" class="btn btn-secondary">View All Packages</a>
       </div>
     </div>
   </section>
@@ -98,26 +152,6 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
           <h3>Family Friendly</h3>
           <p>Packages designed for all age groups to enjoy together seamlessly.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Tours -->
-  <section class="section bg-light">
-    <div class="container">
-      <div class="section-header text-center">
-        <h2>Featured Tours</h2>
-        <p>Our handpicked premium travel packages</p>
-      </div>
-
-      <div class="grid grid-3">
-        {featuredPackages.map(pkg => (
-          <PackageCard pkg={pkg} />
-        ))}
-      </div>
-      
-      <div class="text-center view-all-btn">
-        <a href="/packages" class="btn btn-secondary">View All Packages</a>
       </div>
     </div>
   </section>
@@ -210,89 +244,161 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
     background-color: var(--c-bg-light);
   }
 
-  /* Destinations */
-  .destinations-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+  /* ── Popular Destinations horizontal scroll ── */
+  .dest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+  }
+
+  .dest-header h2 {
+    font-size: 2rem;
+    margin-bottom: 6px;
+  }
+
+  .dest-header p {
+    color: var(--c-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .dest-all-link {
+    font-weight: 600;
+    color: var(--c-accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .dest-all-link:hover { text-decoration: underline; }
+
+  .dest-scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 var(--side-pad, 5vw) 1rem;
+    margin: 0 calc(-1 * var(--side-pad, 5vw));
+  }
+
+  .dest-scroll-wrap::-webkit-scrollbar { display: none; }
+
+  .dest-scroll-track {
+    display: flex;
     gap: 14px;
+    width: max-content;
+    padding: 4px 0 8px;
   }
 
-  @media (max-width: 480px) {
-    .destinations-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-  }
-
-  .dest-card {
+  /* Individual card */
+  .ds-card {
     position: relative;
-    border-radius: 12px;
+    width: 200px;
+    height: 290px;
+    border-radius: 18px;
     overflow: hidden;
-    height: 200px;
-    display: block;
+    flex-shrink: 0;
     cursor: pointer;
-    /* fade-up start state */
+    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.55s ease, transform 0.55s ease;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s;
     transition-delay: var(--delay, 0ms);
   }
 
-  .dest-card.visible {
+  .ds-card.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .dest-card img {
+  .ds-card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  }
+
+  .ds-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
   }
 
-  .dest-card:hover img {
-    transform: scale(1.08);
+  .ds-card:hover img {
+    transform: scale(1.06);
   }
 
-  .dest-content {
+  .ds-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0.82) 100%);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    padding: 12px;
-    gap: 6px;
+    justify-content: space-between;
+    padding: 14px 12px;
   }
 
-  .dest-content h3 {
-    color: #fff;
-    font-size: 1rem;
+  .ds-tag {
+    align-self: flex-start;
+    background: rgba(255,255,255,0.92);
+    color: #333;
+    font-size: 0.68rem;
     font-weight: 700;
-    margin: 0;
-    line-height: 1.2;
+    padding: 4px 9px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
   }
 
-  .dest-book {
+  .ds-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ds-bottom h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .ds-sub {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.72rem;
+    margin: 0;
+  }
+
+  .ds-book {
     display: inline-flex;
     align-items: center;
     gap: 4px;
     background: #25D366;
     color: #fff;
     font-size: 0.72rem;
-    font-weight: 600;
-    padding: 4px 10px;
+    font-weight: 700;
+    padding: 5px 11px;
     border-radius: 20px;
     text-decoration: none;
-    transition: background 0.2s, transform 0.2s;
-    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+    align-self: flex-start;
+    margin-top: 4px;
   }
 
-  .dest-book:hover {
-    background: #1db954;
+  .ds-book:hover {
+    background: #1aa84f;
     transform: scale(1.05);
   }
+
+  @media (max-width: 640px) {
+    .ds-card {
+      width: 160px;
+      height: 240px;
+    }
+    .dest-scroll-track {
+      gap: 10px;
+    }
+  }
+
+
 
   /* Features */
   .feature-card {
@@ -381,7 +487,6 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
 </style>
 
 <script>
-  // Scroll-triggered fade-up for destination cards
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -391,8 +496,8 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0.08 }
   );
 
-  document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+  document.querySelectorAll('.ds-card, .fade-up').forEach((el) => observer.observe(el));
 </script>
