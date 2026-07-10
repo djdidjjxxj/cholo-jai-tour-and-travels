@@ -1,0 +1,68 @@
+<!-- src/components/HeroSlider.astro -->
+---
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+---
+<div class="hero-slider">
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <!-- Slide 1: Kashmir -->
+      <div class="swiper-slide">
+        <img src="/images/hero_kashmir.png" alt="Kashmir" class="hero-img" />
+        <div class="overlay">
+          <h2>Kashmir</h2>
+          <p>₹ 12,999 • 5 Days</p>
+        </div>
+      </div>
+      <!-- Slide 2: Goa -->
+      <div class="swiper-slide">
+        <img src="/images/hero_goa.png" alt="Goa" class="hero-img" />
+        <div class="overlay">
+          <h2>Goa</h2>
+          <p>₹ 9,999 • 3 Days</p>
+        </div>
+      </div>
+      <!-- Slide 3: Darjeeling -->
+      <div class="swiper-slide">
+        <img src="/images/hero_darjeeling.png" alt="Darjeeling" class="hero-img" />
+        <div class="overlay">
+          <h2>Darjeeling</h2>
+          <p>₹ 11,499 • 4 Days</p>
+        </div>
+      </div>
+      <!-- Slide 4: Andaman -->
+      <div class="swiper-slide">
+        <img src="/images/hero_andaman.png" alt="Andaman" class="hero-img" />
+        <div class="overlay">
+          <h2>Andaman</h2>
+          <p>₹ 13,999 • 6 Days</p>
+        </div>
+      </div>
+      <!-- Slide 5: Kerala -->
+      <div class="swiper-slide">
+        <img src="/images/hero_kerala.png" alt="Kerala" class="hero-img" />
+        <div class="overlay">
+          <h2>Kerala</h2>
+          <p>₹ 10,999 • 4 Days</p>
+        </div>
+      </div>
+    </div>
+    <!-- Navigation arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- Pagination dots -->
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+
+<script type="module">
+  import Swiper, { Autoplay, Navigation, Pagination } from 'swiper';
+  const swiper = new Swiper('.swiper', {
+    modules: [Autoplay, Navigation, Pagination],
+    loop: true,
+    autoplay: { delay: 5000 },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    pagination: { el: '.swiper-pagination', clickable: true },
+  });
+</script>

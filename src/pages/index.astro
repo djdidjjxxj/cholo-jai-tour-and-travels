@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSlider from '../components/HeroSlider.astro';
 import PackageCard from '../components/PackageCard.astro';
 import { packages } from '../data/packages';
 import { aboutData } from '../data/siteConfig';
@@ -10,17 +11,8 @@ const featuredPackages = packages.filter(pkg => pkg.featured).slice(0, 3);
 
 <BaseLayout>
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <h1 class="hero-title">Discover the World<br/>With Comfort & Style</h1>
-      <p class="hero-subtitle">Premium travel experiences tailored just for you. Explore breathtaking destinations with the most trusted travel agency.</p>
-      <div class="hero-cta">
-        <a href="/packages" class="btn btn-primary">Explore Packages</a>
-        <a href="/contact" class="btn btn-secondary" style="color: white; border-color: white;">Plan Your Trip</a>
-      </div>
-    </div>
-  </section>
+   <!-- Hero Slider -->
+   <HeroSlider />
 
   <!-- Popular Destinations (Visual Grid) -->
   <section class="section bg-light">

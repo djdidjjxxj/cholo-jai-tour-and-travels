@@ -75,6 +75,52 @@ ul {
   list-style: none;
 }
 
+/* Hero Slider */
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+}
+.hero-slider .hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-slider .overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: #fff;
+}
+.hero-slider .overlay h2 {
+  font-size: clamp(2rem,5vw,3rem);
+  margin: 0;
+}
+.hero-slider .overlay p {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .hero-slider {
+    height: 60vh;
+  }
+  .hero-slider .overlay {
+    padding: 1rem;
+  }
+  .hero-slider .overlay h2 {
+    font-size: 1.8rem;
+  }
+  .hero-slider .overlay p {
+    font-size: 0.9rem;
+  }
+}
+
 button {
   font-family: inherit;
   border: none;
