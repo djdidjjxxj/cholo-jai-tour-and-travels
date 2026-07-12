@@ -231,8 +231,8 @@ import { Phone, Mail } from 'lucide-astro';
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    flex-shrink: 0;
-    /* smooth slide to center */
+    flex-shrink: 1;
+    min-width: 0;
     transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
   }
 
@@ -346,6 +346,7 @@ import { Phone, Mail } from 'lucide-astro';
     align-items: center;
     border-bottom: 1px solid var(--c-border);
     padding-bottom: 16px;
+    gap: 12px;
   }
 
   .logo-img-sm {
@@ -375,6 +376,7 @@ import { Phone, Mail } from 'lucide-astro';
     align-items: center;
     justify-content: center;
     transition: background 0.2s;
+    flex-shrink: 0;
   }
 
   .drawer-x:hover { background: #f1f1f1; }
