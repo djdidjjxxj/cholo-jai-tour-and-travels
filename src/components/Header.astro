@@ -3,8 +3,9 @@ import { siteConfig } from '../data/siteConfig';
 import { Phone, Mail } from 'lucide-astro';
 ---
 
-<header class="site-header" id="site-header">
-  <!-- Top bar -->
+<!-- Fixed header that NEVER scrolls away -->
+<header id="site-header" class="site-header">
+  <!-- Top bar (desktop only) -->
   <div class="top-bar">
     <div class="container top-bar-inner">
       <div class="top-contacts">
@@ -19,17 +20,16 @@ import { Phone, Mail } from 'lucide-astro';
     </div>
   </div>
 
-  <!-- Main nav -->
+  <!-- Main nav bar -->
   <div class="nav-bar">
     <div class="container nav-inner">
-      <!-- Logo → always goes home -->
-      <a href="/" class="logo-link" aria-label="Go to homepage">
+      <!-- Logo -->
+      <a href="/" class="logo-link" id="nav-logo" aria-label="Go to homepage">
         <img src="/images/icon.png" alt="Cholo Jai" class="logo-img"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
-        <span class="logo-text" style="display:none">Cholo Jai</span>
+             onerror="this.style.display='none'" />
       </a>
 
-      <!-- Desktop nav -->
+      <!-- Desktop nav links -->
       <nav class="desktop-nav" aria-label="Main navigation">
         <a href="/">Home</a>
         <a href="/packages">Packages</a>
@@ -50,9 +50,11 @@ import { Phone, Mail } from 'lucide-astro';
     </div>
   </div>
 </header>
-<div class="header-spacer"></div>
 
-<!-- Mobile drawer (outside header so z-index stacking is clean) -->
+<!-- This pushes page content below the fixed header -->
+<div id="header-spacer" class="header-spacer"></div>
+
+<!-- Mobile side drawer -->
 <div class="drawer" id="nav-drawer" aria-hidden="true">
   <div class="drawer-top">
     <a href="/" class="logo-link">
@@ -83,15 +85,42 @@ import { Phone, Mail } from 'lucide-astro';
 <div class="drawer-bg" id="drawer-bg"></div>
 
 <script>
-  // Use a self-contained function to avoid ViewTransitions re-init issues
   function initNav() {
+    const header    = document.getElementById('site-header');
+    const spacer    = document.getElementById('header-spacer');
     const burgerBtn = document.getElementById('burger-btn');
     const drawer    = document.getElementById('nav-drawer');
     const drawerBg  = document.getElementById('drawer-bg');
     const closeBtn  = document.getElementById('drawer-close-btn');
+    const logo      = document.getElementById('nav-logo');
 
-    if (!burgerBtn || !drawer || !drawerBg) return;
+    if (!burgerBtn || !drawer || !drawerBg || !header || !spacer) return;
 
+    // -- Sync spacer height to actual header height --
+    function syncSpacer() {
+      spacer.style.height = header.offsetHeight + 'px';
+    }
+    syncSpacer();
+    window.addEventListener('resize', syncSpacer, { passive: true });
+
+    // -- Scroll: animate logo to center on mobile --
+    let lastY = window.scrollY;
+    let isMobile = () => window.innerWidth <= 768;
+
+    function onScroll() {
+      if (!isMobile() || !logo) return;
+      const y = window.scrollY;
+      if (y > 60) {
+        logo.classList.add('logo-centered');
+      } else {
+        logo.classList.remove('logo-centered');
+      }
+      lastY = y;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // apply immediately
+
+    // -- Drawer open/close --
     let open = false;
 
     function openDrawer() {
@@ -119,35 +148,35 @@ import { Phone, Mail } from 'lucide-astro';
 
     closeBtn?.addEventListener('click', closeDrawer);
     drawerBg.addEventListener('click', closeDrawer);
-
-    // Close on nav link tap
     drawer.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', closeDrawer);
     });
-
   }
 
-  // Run on first load and after every Astro page transition
   document.addEventListener('astro:page-load', initNav);
   initNav();
 </script>
 
 <style>
-  /* ── Top bar ── */
+  /* ===== SITE HEADER — always fixed to top ===== */
   .site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    background: #fff;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 9999 !important;
+    background: #ffffff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.09);
   }
 
+  /* Spacer pushes content below fixed header */
   .header-spacer {
-    height: 114px; /* Desktop: top-bar(38) + nav-bar(76) */
+    display: block;
+    height: 110px; /* fallback; JS overrides this */
   }
 
+  /* ── Top bar ── */
   .top-bar {
     background: var(--c-primary);
     padding: 6px 0;
@@ -187,7 +216,7 @@ import { Phone, Mail } from 'lucide-astro';
     opacity: 0.9;
   }
 
-  /* ── Main nav ── */
+  /* ── Main nav bar ── */
   .nav-bar {
     padding: 6px 0;
   }
@@ -205,22 +234,18 @@ import { Phone, Mail } from 'lucide-astro';
     gap: 8px;
     text-decoration: none;
     flex-shrink: 0;
+    /* smooth slide to center */
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
   }
 
   .logo-img {
-    height: 64px;
+    height: 60px;
     width: auto;
     object-fit: contain;
     display: block;
   }
 
-  .logo-text {
-    font-family: var(--f-heading);
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--c-primary);
-  }
-
+  /* ── Desktop nav ── */
   .desktop-nav {
     display: flex;
     gap: 28px;
@@ -290,7 +315,7 @@ import { Phone, Mail } from 'lucide-astro';
     width: min(320px, 88vw);
     height: 100dvh;
     background: #fff;
-    z-index: 500;
+    z-index: 10000;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -306,11 +331,10 @@ import { Phone, Mail } from 'lucide-astro';
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.48);
-    z-index: 450;
+    z-index: 9998;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    backdrop-filter: blur(2px);
   }
 
   .drawer-bg.open {
@@ -327,7 +351,7 @@ import { Phone, Mail } from 'lucide-astro';
   }
 
   .logo-img-sm {
-    height: 60px;
+    height: 52px;
     width: auto;
     object-fit: contain;
   }
@@ -413,14 +437,21 @@ import { Phone, Mail } from 'lucide-astro';
 
   .drawer-wa-btn:hover { background: #1aa84f; }
 
-  /* ── Responsive ── */
+  /* ═══════════════════════════════
+     MOBILE (≤768px)
+  ═══════════════════════════════ */
   @media (max-width: 768px) {
-    .top-bar { display: none; }
-    .nav-bar { padding: 4px 0; }
-    .desktop-nav { display: none; }
-    .desktop-only { display: none !important; }
-    .logo-img { height: 56px; }
-    .burger { display: flex !important; }
-    .header-spacer { height: 64px; } /* Mobile: only nav-bar */
+    .top-bar         { display: none; }
+    .nav-bar         { padding: 4px 0; }
+    .desktop-nav     { display: none; }
+    .desktop-only    { display: none !important; }
+    .logo-img        { height: 52px; }
+    .burger          { display: flex !important; }
+    .header-spacer   { height: 64px; }
+
+    /* Logo animates to center when scrolled */
+    #nav-logo.logo-centered {
+      transform: translateX(calc(50vw - 50% - 20px));
+    }
   }
 </style>
