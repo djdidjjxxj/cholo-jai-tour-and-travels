@@ -3,354 +3,414 @@ import { siteConfig } from '../data/siteConfig';
 import { Phone, Mail } from 'lucide-astro';
 ---
 
-<header class="header">
-  <div class="header-top">
-    <div class="container top-bar">
-      <div class="contact-info">
-        <a href={`tel:${siteConfig.phoneNumbers[0].replace(/\s/g, '')}`} class="contact-link">
-          <Phone size={16} /> {siteConfig.phoneNumbers[0]}
+<header class="site-header" id="site-header">
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-contacts">
+        <a href={`tel:${siteConfig.phoneNumbers[0].replace(/\s/g, '')}`} class="top-link">
+          <Phone size={14} /> {siteConfig.phoneNumbers[0]}
         </a>
-        <a href={`mailto:${siteConfig.email}`} class="contact-link">
-          <Mail size={16} /> {siteConfig.email}
+        <a href={`mailto:${siteConfig.email}`} class="top-link">
+          <Mail size={14} /> {siteConfig.email}
         </a>
       </div>
-      <div class="social-links">
-        <span class="trust-badge">Govt. Registered Agency</span>
-      </div>
+      <span class="trust-badge">✅ Govt. Registered Agency</span>
     </div>
   </div>
-  
-  <div class="header-main">
-    <div class="container nav-container">
-      <a href="/" class="logo-link">
-        <img src="/logo.png" alt={siteConfig.logoAlt} class="logo" onerror="this.src='/images/tour-1.jpeg'; this.classList.add('logo-fallback');" />
+
+  <!-- Main nav -->
+  <div class="nav-bar">
+    <div class="container nav-inner">
+      <!-- Logo → always goes home -->
+      <a href="/" class="logo-link" aria-label="Go to homepage">
+        <img src="/images/icon.png" alt="Cholo Jai" class="logo-img"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
+        <span class="logo-text" style="display:none">Cholo Jai</span>
       </a>
 
-      <nav class="desktop-nav">
-        <ul class="nav-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="/packages">Packages</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/gallery">Gallery</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
+      <!-- Desktop nav -->
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/packages">Packages</a>
+        <a href="/about">About</a>
+        <a href="/gallery">Gallery</a>
+        <a href="/contact">Contact</a>
       </nav>
 
-      <div class="nav-actions">
-        <a href="/contact" class="btn btn-primary desktop-book">Book Now</a>
-        <!-- Hamburger button -->
-        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span><span></span>
+      <div class="nav-end">
+        <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20a%20tour!" target="_blank" rel="noopener" class="btn btn-primary desktop-only">📲 Book Now</a>
+        <!-- Hamburger -->
+        <button class="burger" id="burger-btn" aria-label="Open menu" aria-expanded="false" type="button">
+          <span class="bline"></span>
+          <span class="bline"></span>
+          <span class="bline"></span>
         </button>
       </div>
     </div>
   </div>
-
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer" id="mobile-drawer">
-    <div class="drawer-header">
-      <a href="/" class="logo-link">
-        <img src="/logo.png" alt="Cholo Jai" class="logo" onerror="this.src='/images/tour-1.jpeg'" />
-      </a>
-      <button class="drawer-close" id="drawer-close" aria-label="Close menu">&#x2715;</button>
-    </div>
-    <nav class="drawer-nav">
-      <a href="/">Home</a>
-      <a href="/packages">Packages</a>
-      <a href="/about">About</a>
-      <a href="/gallery">Gallery</a>
-      <a href="/contact">Contact</a>
-    </nav>
-    <div class="drawer-contact">
-      <a href="tel:9830905332">📞 98309 05332</a>
-      <a href="mailto:cholojai2013@gmail.com">✉ cholojai2013@gmail.com</a>
-    </div>
-    <a href="/contact" class="btn btn-primary drawer-book">Book Now</a>
-  </div>
-  <div class="drawer-backdrop" id="drawer-backdrop"></div>
 </header>
 
+<!-- Mobile drawer (outside header so z-index stacking is clean) -->
+<div class="drawer" id="nav-drawer" aria-hidden="true">
+  <div class="drawer-top">
+    <a href="/" class="logo-link">
+      <img src="/images/icon.png" alt="Cholo Jai" class="logo-img-sm"
+           onerror="this.style.display='none'" />
+      <span class="drawer-brand">Cholo Jai</span>
+    </a>
+    <button class="drawer-x" id="drawer-close-btn" aria-label="Close menu" type="button">✕</button>
+  </div>
+
+  <nav class="drawer-links">
+    <a href="/">🏠 Home</a>
+    <a href="/packages">🧳 Packages</a>
+    <a href="/about">ℹ️ About</a>
+    <a href="/gallery">🖼️ Gallery</a>
+    <a href="/contact">📞 Contact</a>
+  </nav>
+
+  <div class="drawer-contact-list">
+    <a href={`tel:${siteConfig.phoneNumbers[0].replace(/\s/g, '')}`}>📞 {siteConfig.phoneNumbers[0]}</a>
+    <a href={`mailto:${siteConfig.email}`}>✉️ {siteConfig.email}</a>
+  </div>
+
+  <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20a%20tour!" target="_blank" rel="noopener" class="drawer-wa-btn">
+    📲 Book on WhatsApp
+  </a>
+</div>
+<div class="drawer-bg" id="drawer-bg"></div>
+
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const drawer = document.getElementById('mobile-drawer');
-  const backdrop = document.getElementById('drawer-backdrop');
-  const closeBtn = document.getElementById('drawer-close');
+  // Use a self-contained function to avoid ViewTransitions re-init issues
+  function initNav() {
+    const burgerBtn = document.getElementById('burger-btn');
+    const drawer    = document.getElementById('nav-drawer');
+    const drawerBg  = document.getElementById('drawer-bg');
+    const closeBtn  = document.getElementById('drawer-close-btn');
 
-  function openDrawer() {
-    drawer?.classList.add('open');
-    backdrop?.classList.add('open');
-    hamburger?.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
+    if (!burgerBtn || !drawer || !drawerBg) return;
+
+    let open = false;
+
+    function openDrawer() {
+      open = true;
+      drawer.classList.add('open');
+      drawerBg.classList.add('open');
+      burgerBtn.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      open = false;
+      drawer.classList.remove('open');
+      drawerBg.classList.remove('open');
+      burgerBtn.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    burgerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      open ? closeDrawer() : openDrawer();
+    });
+
+    closeBtn?.addEventListener('click', closeDrawer);
+    drawerBg.addEventListener('click', closeDrawer);
+
+    // Close on nav link tap
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
   }
 
-  function closeDrawer() {
-    drawer?.classList.remove('open');
-    backdrop?.classList.remove('open');
-    hamburger?.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  hamburger?.addEventListener('click', openDrawer);
-  closeBtn?.addEventListener('click', closeDrawer);
-  backdrop?.addEventListener('click', closeDrawer);
-
-  // Close on nav link click
-  drawer?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeDrawer);
-  });
+  // Run on first load and after every Astro page transition
+  document.addEventListener('astro:page-load', initNav);
+  initNav();
 </script>
 
 <style>
-  .header {
+  /* ── Top bar ── */
+  .site-header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background-color: var(--c-neutral);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .header-top {
-    background-color: var(--c-primary);
-    color: var(--c-neutral);
-    padding: 8px 0;
-    font-size: 0.875rem;
+    z-index: 200;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   }
 
   .top-bar {
+    background: var(--c-primary);
+    padding: 6px 0;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .top-bar-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
   }
 
-  .contact-info {
+  .top-contacts {
     display: flex;
-    gap: 20px;
+    gap: 18px;
+    flex-wrap: wrap;
   }
 
-  .contact-link {
+  .top-link {
     display: flex;
     align-items: center;
-    gap: 6px;
-    opacity: 0.9;
+    gap: 5px;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    transition: color 0.2s;
   }
 
-  .contact-link:hover {
-    opacity: 1;
-  }
+  .top-link:hover { color: #fff; }
 
   .trust-badge {
-    font-weight: 500;
-    letter-spacing: 0.5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
     opacity: 0.9;
   }
 
-  .header-main {
-    padding: 15px 0;
+  /* ── Main nav ── */
+  .nav-bar {
+    padding: 10px 0;
   }
 
-  .nav-container {
+  .nav-inner {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  .logo {
-    height: 60px;
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-img {
+    height: 52px;
     width: auto;
     object-fit: contain;
+    display: block;
   }
 
-  .logo-fallback {
-    height: 40px;
-    border-radius: var(--radius-sm);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 32px;
-  }
-
-  .nav-links a {
+  .logo-text {
     font-family: var(--f-heading);
-    font-weight: 500;
-    color: var(--c-text);
-    position: relative;
-    padding: 5px 0;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--c-accent);
-    transition: var(--transition);
-  }
-
-  .nav-links a:hover {
+    font-weight: 700;
+    font-size: 1.2rem;
     color: var(--c-primary);
   }
 
-  .nav-links a:hover::after {
-    width: 100%;
+  .desktop-nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
   }
 
-  /* Hamburger button — base: hidden on desktop */
-  .hamburger {
+  .desktop-nav a {
+    font-family: var(--f-heading);
+    font-weight: 500;
+    color: var(--c-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 4px 0;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .desktop-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--c-accent);
+    transition: width 0.25s ease;
+  }
+
+  .desktop-nav a:hover { color: var(--c-primary); }
+  .desktop-nav a:hover::after { width: 100%; }
+
+  .nav-end {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* ── Hamburger ── */
+  .burger {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    width: 28px;
-    height: 20px;
+    width: 30px;
+    height: 22px;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 200;
+    flex-shrink: 0;
   }
 
-  @media (max-width: 768px) {
-    .header-top {
-      display: none;
-    }
-    .desktop-nav {
-      display: none;
-    }
-    .desktop-book {
-      display: none;
-    }
-    .logo {
-      height: 45px;
-    }
-    .hamburger {
-      display: flex !important;
-    }
-  }
-
-  .hamburger span {
+  .bline {
     display: block;
     width: 100%;
     height: 2.5px;
     background: var(--c-primary);
     border-radius: 3px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s, opacity 0.3s;
+    pointer-events: none;
   }
 
-  /* Mobile Drawer */
-  .mobile-drawer {
+  /* ── Drawer ── */
+  .drawer {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: min(320px, 85vw);
+    right: -110%;
+    width: min(320px, 88vw);
     height: 100dvh;
     background: #fff;
-    z-index: 300;
+    z-index: 500;
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
-    gap: 1.5rem;
-    box-shadow: -4px 0 30px rgba(0,0,0,0.15);
-    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 20px;
+    gap: 20px;
+    box-shadow: -6px 0 32px rgba(0,0,0,0.18);
+    transition: right 0.32s cubic-bezier(0.4,0,0.2,1);
     overflow-y: auto;
   }
 
-  .mobile-drawer.open {
-    right: 0;
-  }
+  .drawer.open { right: 0; }
 
-  .drawer-backdrop {
+  .drawer-bg {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 250;
+    background: rgba(0,0,0,0.48);
+    z-index: 450;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
     backdrop-filter: blur(2px);
   }
 
-  .drawer-backdrop.open {
+  .drawer-bg.open {
     opacity: 1;
     pointer-events: auto;
   }
 
-  .drawer-header {
+  .drawer-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--c-border);
-    padding-bottom: 1rem;
+    padding-bottom: 16px;
   }
 
-  .drawer-close {
+  .logo-img-sm {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .drawer-brand {
+    font-family: var(--f-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--c-primary);
+    margin-left: 8px;
+  }
+
+  .drawer-x {
     background: none;
     border: none;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     cursor: pointer;
     color: var(--c-text);
     width: 36px;
     height: 36px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
     transition: background 0.2s;
   }
 
-  .drawer-close:hover {
-    background: var(--c-bg-light);
-  }
+  .drawer-x:hover { background: #f1f1f1; }
 
-  .drawer-nav {
+  .drawer-links {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 2px;
   }
 
-  .drawer-nav a {
+  .drawer-links a {
     font-family: var(--f-heading);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--c-text);
-    padding: 0.75rem 0.5rem;
-    border-radius: 8px;
     text-decoration: none;
+    padding: 12px 10px;
+    border-radius: 10px;
     transition: all 0.2s;
     border-bottom: 1px solid var(--c-border);
   }
 
-  .drawer-nav a:hover {
-    color: var(--c-accent);
+  .drawer-links a:hover {
     background: var(--c-bg-light);
-    padding-left: 1rem;
+    color: var(--c-accent);
+    padding-left: 18px;
   }
 
-  .drawer-contact {
+  .drawer-contact-list {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 8px;
     margin-top: auto;
-    padding-top: 1rem;
+    padding-top: 14px;
     border-top: 1px solid var(--c-border);
   }
 
-  .drawer-contact a {
-    font-size: 0.9rem;
+  .drawer-contact-list a {
+    font-size: 0.88rem;
     color: var(--c-text-muted);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
   }
 
-  .drawer-contact a:hover {
-    color: var(--c-accent);
-  }
+  .drawer-contact-list a:hover { color: var(--c-accent); }
 
-  .drawer-book {
+  .drawer-wa-btn {
+    display: block;
     text-align: center;
-    width: 100%;
+    background: #25D366;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .drawer-wa-btn:hover { background: #1aa84f; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .top-bar { display: none; }
+    .desktop-nav { display: none; }
+    .desktop-only { display: none !important; }
+    .logo-img { height: 42px; }
+    .burger { display: flex !important; }
   }
 </style>

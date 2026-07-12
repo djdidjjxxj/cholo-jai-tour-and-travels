@@ -48,7 +48,7 @@ export const packages: TourPackage[] = [
     price: "₹25,000",
     image: "/images/tour-4.png",
     shortDescription: "Explore the royal palaces, majestic forts, and vibrant culture of the desert state.",
-    featured: false
+    featured: true
   },
   {
     id: "pkg-5",
@@ -68,6 +68,86 @@ export const packages: TourPackage[] = [
     price: "₹12,000",
     image: "/images/tour-6.png",
     shortDescription: "Enjoy the sun, sand, and sea with our exciting Goa tour packages. Perfect for a quick escape.",
+    featured: true
+  },
+  {
+    id: "pkg-7",
+    title: "Magical Meghalaya",
+    destination: "Meghalaya, India",
+    duration: "5 Nights / 6 Days",
+    price: "₹17,500",
+    image: "/images/tour-7.png",
+    shortDescription: "Discover the abode of clouds — living root bridges, cascading waterfalls and misty highlands.",
+    featured: true
+  },
+  {
+    id: "pkg-8",
+    title: "Ooty & Kodaikanal Hills",
+    destination: "Tamil Nadu, India",
+    duration: "4 Nights / 5 Days",
+    price: "₹13,500",
+    image: "/images/tour-8.png",
+    shortDescription: "Escape to the Nilgiri hills with lush tea estates, botanical gardens, and cool mountain air.",
+    featured: true
+  },
+  {
+    id: "pkg-9",
+    title: "Golden Triangle Tour",
+    destination: "Delhi-Agra-Jaipur",
+    duration: "5 Nights / 6 Days",
+    price: "₹19,000",
+    image: "/images/tour-9.png",
+    shortDescription: "The classic India experience — visit the iconic Taj Mahal, Amber Fort, and Red Fort.",
+    featured: true
+  },
+  {
+    id: "pkg-10",
+    title: "Leh Ladakh Expedition",
+    destination: "Ladakh, India",
+    duration: "7 Nights / 8 Days",
+    price: "₹28,000",
+    image: "/images/tour-10.png",
+    shortDescription: "Conquer the land of high passes with dramatic landscapes, monasteries, and pristine lakes.",
+    featured: true
+  },
+  {
+    id: "pkg-11",
+    title: "Varanasi Spiritual Tour",
+    destination: "Varanasi, India",
+    duration: "3 Nights / 4 Days",
+    price: "₹10,500",
+    image: "/images/tour-11.png",
+    shortDescription: "Witness the mystical Ganga Aarti and explore the oldest living city in the world.",
+    featured: false
+  },
+  {
+    id: "pkg-12",
+    title: "Coorg Coffee Trails",
+    destination: "Coorg, Karnataka",
+    duration: "3 Nights / 4 Days",
+    price: "₹11,000",
+    image: "/images/tour-12.png",
+    shortDescription: "Immerse yourself in lush coffee plantations, misty hills, and cascading waterfalls in Scotland of India.",
+    featured: false
+  },
+  {
+    id: "pkg-13",
+    title: "Spiti Valley Circuit",
+    destination: "Himachal Pradesh",
+    duration: "8 Nights / 9 Days",
+    price: "₹32,000",
+    image: "/images/tour-13.png",
+    shortDescription: "An off-beat Himalayan adventure through ancient monasteries, high-altitude villages, and crystal rivers.",
+    featured: false
+  },
+  {
+    id: "pkg-14",
+    title: "Sundarbans Mangrove Tour",
+    destination: "West Bengal, India",
+    duration: "2 Nights / 3 Days",
+    price: "₹8,500",
+    image: "/images/tour-14.png",
+    shortDescription: "Explore the world's largest mangrove delta — spot Royal Bengal Tigers and cruise through dense jungle waterways.",
     featured: false
   }
 ];
