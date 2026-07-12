@@ -50,6 +50,7 @@ import { Phone, Mail } from 'lucide-astro';
     </div>
   </div>
 </header>
+<div class="header-spacer"></div>
 
 <!-- Mobile drawer (outside header so z-index stacking is clean) -->
 <div class="drawer" id="nav-drawer" aria-hidden="true">
@@ -124,26 +125,6 @@ import { Phone, Mail } from 'lucide-astro';
       link.addEventListener('click', closeDrawer);
     });
 
-    // Mobile Scroll Animation Logic
-    let lastScrollY = window.scrollY;
-    const header = document.getElementById('site-header');
-
-    function handleScroll() {
-      if (window.innerWidth > 768 || !header) return;
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 60) {
-        // Scrolling down
-        header.classList.add('scroll-down');
-      } else if (currentScrollY < lastScrollY) {
-        // Scrolling up
-        header.classList.remove('scroll-down');
-      }
-      lastScrollY = currentScrollY;
-    }
-    
-    window.removeEventListener('scroll', handleScroll);
-    window.addEventListener('scroll', handleScroll, { passive: true });
   }
 
   // Run on first load and after every Astro page transition
@@ -154,11 +135,17 @@ import { Phone, Mail } from 'lucide-astro';
 <style>
   /* ── Top bar ── */
   .site-header {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 200;
+    left: 0;
+    width: 100%;
+    z-index: 999;
     background: #fff;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .header-spacer {
+    height: 114px; /* Desktop: top-bar(38) + nav-bar(76) */
   }
 
   .top-bar {
@@ -434,23 +421,6 @@ import { Phone, Mail } from 'lucide-astro';
     .desktop-only { display: none !important; }
     .logo-img { height: 56px; }
     .burger { display: flex !important; }
-    
-    /* Scroll Animation Styles */
-    .nav-inner { position: relative; }
-    .logo-link {
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .site-header.scroll-down .logo-link {
-      transform: translateX(calc(50vw - 5vw - 50%));
-    }
-    
-    .burger {
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    .site-header.scroll-down .burger {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.8);
-    }
+    .header-spacer { height: 64px; } /* Mobile: only nav-bar */
   }
 </style>
