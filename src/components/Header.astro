@@ -15,7 +15,7 @@ import { Phone, Mail } from 'lucide-astro';
           <Mail size={14} /> {siteConfig.email}
         </a>
       </div>
-      <span class="trust-badge">✅ Govt. Registered Agency</span>
+      <span class="trust-badge">Govt. Registered Agency</span>
     </div>
   </div>
 
@@ -39,7 +39,7 @@ import { Phone, Mail } from 'lucide-astro';
       </nav>
 
       <div class="nav-end">
-        <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20a%20tour!" target="_blank" rel="noopener" class="btn btn-primary desktop-only">📲 Book Now</a>
+        <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20a%20tour!" target="_blank" rel="noopener" class="btn btn-primary desktop-only">Book Now</a>
         <!-- Hamburger -->
         <button class="burger" id="burger-btn" aria-label="Open menu" aria-expanded="false" type="button">
           <span class="bline"></span>
@@ -63,20 +63,20 @@ import { Phone, Mail } from 'lucide-astro';
   </div>
 
   <nav class="drawer-links">
-    <a href="/">🏠 Home</a>
-    <a href="/packages">🧳 Packages</a>
-    <a href="/about">ℹ️ About</a>
-    <a href="/gallery">🖼️ Gallery</a>
-    <a href="/contact">📞 Contact</a>
+    <a href="/">Home</a>
+    <a href="/packages">Packages</a>
+    <a href="/about">About</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/contact">Contact</a>
   </nav>
 
   <div class="drawer-contact-list">
-    <a href={`tel:${siteConfig.phoneNumbers[0].replace(/\s/g, '')}`}>📞 {siteConfig.phoneNumbers[0]}</a>
-    <a href={`mailto:${siteConfig.email}`}>✉️ {siteConfig.email}</a>
+    <a href={`tel:${siteConfig.phoneNumbers[0].replace(/\s/g, '')}`}>{siteConfig.phoneNumbers[0]}</a>
+    <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
   </div>
 
   <a href="https://wa.me/919830905332?text=Hi%2C%20I%20want%20to%20book%20a%20tour!" target="_blank" rel="noopener" class="drawer-wa-btn">
-    📲 Book on WhatsApp
+    Book on WhatsApp
   </a>
 </div>
 <div class="drawer-bg" id="drawer-bg"></div>
@@ -123,6 +123,27 @@ import { Phone, Mail } from 'lucide-astro';
     drawer.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', closeDrawer);
     });
+
+    // Mobile Scroll Animation Logic
+    let lastScrollY = window.scrollY;
+    const header = document.getElementById('site-header');
+
+    function handleScroll() {
+      if (window.innerWidth > 768 || !header) return;
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        // Scrolling down
+        header.classList.add('scroll-down');
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up
+        header.classList.remove('scroll-down');
+      }
+      lastScrollY = currentScrollY;
+    }
+    
+    window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
   }
 
   // Run on first load and after every Astro page transition
@@ -412,5 +433,23 @@ import { Phone, Mail } from 'lucide-astro';
     .desktop-only { display: none !important; }
     .logo-img { height: 42px; }
     .burger { display: flex !important; }
+    
+    /* Scroll Animation Styles */
+    .nav-inner { position: relative; }
+    .logo-link {
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .site-header.scroll-down .logo-link {
+      transform: translateX(calc(50vw - 5vw - 50%));
+    }
+    
+    .burger {
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .site-header.scroll-down .burger {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.8);
+    }
   }
 </style>
