@@ -202,7 +202,7 @@ import { Phone, Mail } from 'lucide-astro';
 
   /* ── Main nav ── */
   .nav-bar {
-    padding: 10px 0;
+    padding: 6px 0;
   }
 
   .nav-inner {
@@ -218,11 +218,10 @@ import { Phone, Mail } from 'lucide-astro';
     gap: 8px;
     text-decoration: none;
     flex-shrink: 0;
-    height: 52px;
   }
 
   .logo-img {
-    height: 85px;
+    height: 64px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -430,10 +429,10 @@ import { Phone, Mail } from 'lucide-astro';
   /* ── Responsive ── */
   @media (max-width: 768px) {
     .top-bar { display: none; }
+    .nav-bar { padding: 4px 0; }
     .desktop-nav { display: none; }
     .desktop-only { display: none !important; }
-    .logo-link { height: 42px; }
-    .logo-img { height: 75px; }
+    .logo-img { height: 56px; }
     .burger { display: flex !important; }
     
     /* Scroll Animation Styles */
